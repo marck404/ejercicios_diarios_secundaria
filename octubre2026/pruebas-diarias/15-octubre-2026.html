@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#234a77">
+  <title>Prueba diaria · 15 de octubre de 2026</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#172b45;background:#eef4f8;font-synthesis:none;text-rendering:optimizeLegibility;--blue:#234a77;--teal:#087e8b;--muted:#62758b;--line:#d8e2ec;--green:#157347;--green-bg:#e5f5eb;--red:#b42332;--red-bg:#ffebed}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px 14px 48px;background:radial-gradient(ellipse at 15% 0%,#d9f1f2 0,transparent 38%),radial-gradient(ellipse at 95% 15%,#e6e2fb 0,transparent 34%),#eef4f8}.app{width:min(100%,760px);margin:0 auto}.hero{text-align:center;color:var(--blue);margin:10px 0 20px}.eyebrow{font-size:.78rem;letter-spacing:.13em;font-weight:800;color:var(--teal);margin:0 0 7px}.hero h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:0}.date{display:inline-block;margin:12px 0 0;padding:6px 13px;border-radius:999px;background:#fff;color:var(--blue);font-weight:700;box-shadow:0 3px 12px #234a7712}.card{background:#fff;border:1px solid #e1e8ef;border-radius:22px;padding:clamp(20px,5vw,34px);box-shadow:0 16px 44px #28446116}.hidden,[hidden]{display:none!important}h2{margin:0 0 10px;color:var(--blue)}p{line-height:1.55}.intro-text{color:var(--muted);margin:0 0 20px}.name-label{display:grid;gap:7px;font-weight:700;margin:22px 0 16px}.name-label input{font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;outline:none}.name-label input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087e8b20}.btn{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px 20px;background:var(--teal);color:white;cursor:pointer;transition:transform .12s,filter .12s}.btn:hover{filter:brightness(.94);transform:translateY(-1px)}.btn:focus-visible,.option:focus-visible{outline:3px solid #f4bc4b;outline-offset:2px}.status{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap;margin-bottom:12px;color:var(--muted);font-size:.92rem;font-weight:700}.tag{background:#eaf6f6;color:#08616b;padding:5px 11px;border-radius:999px}.progress{height:9px;border-radius:99px;overflow:hidden;background:#e7edf3;margin-bottom:24px}.progress div{height:100%;background:linear-gradient(90deg,#0b8792,#61b99a);transition:width .25s}.question{font-size:clamp(1.13rem,3vw,1.38rem);line-height:1.45;margin:0 0 19px}.options{display:grid;gap:10px}.option{font:inherit;text-align:left;line-height:1.4;padding:13px 15px;border:1.5px solid var(--line);border-radius:13px;background:#f9fbfd;color:#172b45;cursor:pointer;transition:background .14s,border-color .14s,transform .14s}.option:hover:not(:disabled){border-color:#66aeb2;background:#f0f9f8;transform:translateX(2px)}.option:disabled{cursor:default}.option.correct{border-color:#76bb8f;background:var(--green-bg);color:#115c38}.option.wrong{border-color:#e89aa1;background:var(--red-bg);color:#96202d}.feedback{margin:16px 0 0;padding:12px 14px;border-radius:12px;line-height:1.5}.feedback.ok{background:var(--green-bg);color:#115c38}.feedback.bad{background:var(--red-bg);color:#96202d}.feedback strong{display:block;margin-bottom:3px}.actions{display:flex;justify-content:flex-end;margin-top:18px}.score{font-size:clamp(2.7rem,8vw,4rem);font-weight:850;color:var(--teal);margin:8px 0}.result{text-align:center}.result p{color:var(--muted)}.result .btn{margin-top:12px}.footnote{text-align:center;color:var(--muted);font-size:.82rem;margin:16px 0 0}
+    @media(max-width:520px){body{padding:17px 11px 32px}.card{border-radius:17px}.status{font-size:.82rem}.option{padding:12px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">PRÁCTICA CORTA · SECUNDARIA</p>
+      <h1>Prueba diaria</h1>
+      <p class="date">jueves, 15 de octubre de 2026</p>
+    </header>
+    <section id="welcome" class="card">
+      <h2>¡Vamos a practicar!</h2>
+      <p class="intro-text">Son 12 preguntas cortas de opción múltiple. Elige una respuesta para ver si acertaste y leer una explicación.</p>
+      <label class="name-label">Nombre (opcional)<input id="studentName" type="text" maxlength="40" autocomplete="name" placeholder="Escribe tu nombre"></label>
+      <button id="startBtn" class="btn" type="button">Comenzar prueba <span aria-hidden="true">→</span></button>
+    </section>
+    <section id="quiz" class="card hidden" aria-live="polite">
+      <div class="status"><span id="category" class="tag"></span><span id="counter"></span><span id="liveScore"></span></div>
+      <div class="progress" role="progressbar" aria-label="Progreso de la prueba" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0"><div id="progressBar"></div></div>
+      <h2 id="questionText" class="question"></h2>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+      <div class="actions"><button id="nextBtn" class="btn" type="button" hidden>Siguiente pregunta →</button></div>
+    </section>
+    <section id="result" class="card result hidden" aria-live="polite">
+      <p class="eyebrow">PRUEBA TERMINADA</p><h2 id="resultTitle">¡Buen trabajo!</h2>
+      <div id="finalScore" class="score"></div><p id="resultMessage"></p>
+      <button id="retryBtn" class="btn" type="button">Intentar de nuevo</button>
+    </section>
+    <p class="footnote">Lee con calma; cada pregunta es una oportunidad para practicar.</p>
+  </main>
+  <script>
+    "use strict";
+    const questions = [
+      {
+        "section": "Álgebra",
+        "text": "Reduce: 6a − 2a",
+        "answer": "4a",
+        "options": [
+          "4a",
+          "8a",
+          "4a²",
+          "−4a"
+        ],
+        "explanation": "Se restan los coeficientes: 6 − 2 = 4."
+      },
+      {
+        "section": "Fracciones",
+        "text": "Suma y simplifica: 1/3 + 1/3",
+        "answer": "2/3",
+        "options": [
+          "2/3",
+          "1/3",
+          "2/6",
+          "3/4"
+        ],
+        "explanation": "Como los denominadores son iguales, se suman los numeradores: 2/3."
+      },
+      {
+        "section": "Español · copretérito",
+        "text": "Completa en copretérito: Cuando era pequeño, yo ___ en el parque. (jugar)",
+        "answer": "jugaba",
+        "options": [
+          "jugaba",
+          "juego",
+          "jugué",
+          "jugaré"
+        ],
+        "explanation": "El copretérito expresa una acción habitual en el pasado: jugaba."
+      },
+      {
+        "section": "Español · pospretérito",
+        "text": "Completa en pospretérito: Yo ___ un libro si tuviera tiempo. (leer)",
+        "answer": "leería",
+        "options": [
+          "leería",
+          "leo",
+          "leí",
+          "leeré"
+        ],
+        "explanation": "El pospretérito expresa una acción posible o condicional: leería."
+      },
+      {
+        "section": "Español · presente",
+        "text": "Completa en presente: Ellos ___ español en clase. (practicar)",
+        "answer": "practican",
+        "options": [
+          "practican",
+          "practicaron",
+          "practicarán",
+          "practicaban"
+        ],
+        "explanation": "Con ellos en presente se dice practican."
+      },
+      {
+        "section": "Inglés · simple present",
+        "text": "Complete: She ___ English every day. (study)",
+        "answer": "studies",
+        "options": [
+          "studies",
+          "study",
+          "studied",
+          "studying"
+        ],
+        "explanation": "Con she, study cambia a studies."
+      },
+      {
+        "section": "Inglés · simple present",
+        "text": "Complete the question: ___ he play soccer?",
+        "answer": "Does",
+        "options": [
+          "Does",
+          "Do",
+          "Is",
+          "Are"
+        ],
+        "explanation": "Con he se usa does para preguntar en simple present."
+      },
+      {
+        "section": "Historia",
+        "text": "¿De qué país buscaba independizarse México?",
+        "answer": "España",
+        "options": [
+          "España",
+          "Francia",
+          "Portugal",
+          "Estados Unidos"
+        ],
+        "explanation": "La Nueva España buscaba independizarse de España."
+      },
+      {
+        "section": "Historia",
+        "text": "¿Cómo se conoce al llamado de Miguel Hidalgo en 1810?",
+        "answer": "El Grito de Dolores",
+        "options": [
+          "El Grito de Dolores",
+          "El Plan de Ayala",
+          "El Plan de Iguala",
+          "El Abrazo de Acatempan"
+        ],
+        "explanation": "El llamado se conoce como el Grito de Dolores."
+      },
+      {
+        "section": "Geografía",
+        "text": "¿Cuál es la capital del estado de Oaxaca?",
+        "answer": "Oaxaca de Juárez",
+        "options": [
+          "Oaxaca de Juárez",
+          "Tuxtla Gutiérrez",
+          "Puebla de Zaragoza",
+          "Xalapa"
+        ],
+        "explanation": "La capital del estado es Oaxaca de Juárez."
+      },
+      {
+        "section": "Geografía",
+        "text": "¿Cuántas entidades federativas tiene México?",
+        "answer": "32",
+        "options": [
+          "32",
+          "31",
+          "30",
+          "33"
+        ],
+        "explanation": "México está formado por 31 estados y la Ciudad de México: 32 entidades."
+      },
+      {
+        "section": "Geografía",
+        "text": "¿Cuál de estos estados tiene costa en el océano Pacífico?",
+        "answer": "Guerrero",
+        "options": [
+          "Guerrero",
+          "Puebla",
+          "Hidalgo",
+          "Zacatecas"
+        ],
+        "explanation": "Guerrero tiene costa en el Pacífico."
+      }
+    ];
+    const $ = (id) => document.getElementById(id);
+    const shuffle = (items) => {
+      const result = [...items];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    };
+    let current = 0;
+    let score = 0;
+    let student = "";
+    $("startBtn").addEventListener("click", start);
+    $("retryBtn").addEventListener("click", () => {
+      $("result").classList.add("hidden");
+      $("welcome").classList.remove("hidden");
+      $("studentName").focus();
+    });
+    $("nextBtn").addEventListener("click", () => {
+      current++;
+      if (current < questions.length) renderQuestion();
+      else renderResult();
+    });
+    $("studentName").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") start();
+    });
+    function start() {
+      student = $("studentName").value.trim();
+      current = 0;
+      score = 0;
+      $("welcome").classList.add("hidden");
+      $("result").classList.add("hidden");
+      $("quiz").classList.remove("hidden");
+      renderQuestion();
+    }
+    function renderQuestion() {
+      const q = questions[current];
+      $("category").textContent = q.section;
+      $("counter").textContent = `Pregunta ${current + 1} de ${questions.length}`;
+      $("liveScore").textContent = `Puntaje: ${score}`;
+      $("progressBar").style.width = `${(current / questions.length) * 100}%`;
+      $("quiz").querySelector(".progress").setAttribute("aria-valuenow", String(current));
+      $("questionText").textContent = q.text;
+      $("feedback").className = "feedback hidden";
+      $("feedback").replaceChildren();
+      $("nextBtn").hidden = true;
+      const options = shuffle(q.options.map((text) => ({ text, correct: text === q.answer })));
+      const list = $("options");
+      list.replaceChildren();
+      options.forEach((option) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.textContent = option.text;
+        button.addEventListener("click", () => selectAnswer(button, option, options));
+        list.appendChild(button);
+      });
+    }
+    function selectAnswer(selected, choice, options) {
+      $("options").querySelectorAll("button").forEach((button) => { button.disabled = true; });
+      options.forEach((option, index) => {
+        const button = $("options").children[index];
+        if (option.correct) button.classList.add("correct");
+      });
+      const feedback = $("feedback");
+      feedback.className = `feedback ${choice.correct ? "ok" : "bad"}`;
+      const heading = document.createElement("strong");
+      heading.textContent = choice.correct ? "✓ ¡Correcto!" : `La respuesta correcta es: ${questions[current].answer}`;
+      feedback.append(heading, document.createTextNode(questions[current].explanation));
+      if (!choice.correct) selected.classList.add("wrong");
+      else score++;
+      $("liveScore").textContent = `Puntaje: ${score}`;
+      $("nextBtn").textContent = current === questions.length - 1 ? "Ver resultado →" : "Siguiente pregunta →";
+      $("nextBtn").hidden = false;
+      $("nextBtn").focus();
+    }
+    function renderResult() {
+      $("quiz").classList.add("hidden");
+      $("result").classList.remove("hidden");
+      $("finalScore").textContent = `${score} / ${questions.length}`;
+      $("resultTitle").textContent = student ? `¡Terminaste, ${student}!` : "¡Terminaste!";
+      const percent = score / questions.length;
+      $("resultMessage").textContent = percent >= 0.8 ? "¡Excelente trabajo! Sigue practicando." : percent >= 0.5 ? "¡Vas avanzando! Repasa las respuestas y vuelve a intentarlo." : "Cada práctica ayuda. Revisa las explicaciones y prueba otra vez.";
+      $("quiz").querySelector(".progress").setAttribute("aria-valuenow", String(questions.length));
+      $("progressBar").style.width = "100%";
+    }
+  </script>
+</body>
+</html>

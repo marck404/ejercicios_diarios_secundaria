@@ -1,0 +1,2 @@
+cd ~/ejercicios_diarios_secundaria/octubre2026/dia5
+python3 -m http.server 8000

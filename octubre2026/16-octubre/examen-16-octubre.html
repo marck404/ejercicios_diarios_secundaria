@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen del 16 de octubre de 2026 — Álgebra, Geometría, Inglés e Historia</title>
+  <link rel="stylesheet" href="estilos-16-octubre.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>📘 Examen — 16 de octubre de 2026</h1>
+      <p class="subtitle">Álgebra · Geometría · Inglés · Historia y geografía de México</p>
+    </header>
+
+    <!-- Pantalla de inicio -->
+    <section id="start" class="card screen">
+      <h2>¡Bienvenido!</h2>
+      <p>Responde las preguntas de opción múltiple y resuelve <strong>4 retos interactivos</strong> (🧩). Al final verás tu puntaje.</p>
+      <ul class="rules">
+        <li>Cada pregunta vale <strong>1 punto</strong>.</li>
+        <li>En los retos interactivos puedes ganar <strong>puntos parciales</strong>.</li>
+        <li>Verás si acertaste y una explicación después de cada pregunta.</li>
+      </ul>
+      <label class="field">
+        Nombre:
+        <input id="name" type="text" maxlength="40" placeholder="Escribe tu nombre" autocomplete="name">
+      </label>
+      <p class="date" id="examDate">Fecha del examen: 16 de octubre de 2026</p>
+      <button id="startBtn" class="btn primary">Comenzar ▶</button>
+    </section>
+
+    <!-- Pantalla de preguntas -->
+    <section id="quiz" class="screen hidden">
+      <div class="status">
+        <span id="sectionTag" class="tag"></span>
+        <span id="counter"></span>
+        <span id="liveScore" class="live-score"></span>
+      </div>
+      <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+      <div id="card" class="card" aria-live="polite"></div>
+    </section>
+
+    <!-- Pantalla de resultados -->
+    <section id="result" class="card screen hidden">
+      <div id="resultContent"></div>
+    </section>
+  </main>
+
+  <div id="confetti" aria-hidden="true"></div>
+  <script src="examen-16-octubre.js"></script>
+</body>
+</html>
